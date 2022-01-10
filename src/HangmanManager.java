@@ -67,9 +67,30 @@ public class HangmanManager {
             if (!patternSet.containsKey(gPattern)) {
                 patternSet.put(gPattern, new TreeSet<>());
             }
-
             patternSet.get(gPattern).add(word);
         }
         return patternSet;
+    }
+
+    public void refreshPattern(TreeMap<String, SortedSet<String>> patternList){
+        pattern = "";
+        int count = 0;
+        for (String patternK : patternList.keySet()){
+            if (patternList.get(patternK).size() > count){
+                pattern = patternK;
+                count = patternList.get(patternK).size();
+            }
+        }
+    }
+
+
+    public void updWordSet(TreeMap<String, SortedSet<String>> patternList){
+        int pSize = 0;
+        for (String patternK : patternList.keySet()){
+            if (patternList.get(patternK).size() > pSize){
+                pSize = patternList.get(patternK).size();
+                wordSet = patternList.get(patternK);
+            }
+        }
     }
 }
