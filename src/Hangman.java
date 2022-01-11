@@ -67,8 +67,6 @@ public class Hangman {
     }
 
     public static void showResults(HangmanManager hangman) {
-        // if the game is over, the answer is the first word in the list
-        // of words, so we use an iterator to get it
         String answer = hangman.words().iterator().next();
         System.out.println("answer = " + answer);
         if (hangman.guessesLeft() > 0) {

@@ -93,4 +93,34 @@ public class HangmanManager {
             }
         }
     }
+
+    int record(char guess){
+        if (remainingGuesses < 1 || wordSet.isEmpty()){
+            throw new IllegalStateException("");
+        }else if (!wordSet.isEmpty() && lettersGuessed.contains(guess)){
+            throw new IllegalArgumentException("");
+        }
+
+        TreeMap<String, SortedSet<String>> patternAnalysis = patternsList(guess);
+        refreshPattern(patternAnalysis);
+        updWordSet(patternAnalysis);
+
+        lettersGuessed.add(guess);
+
+        return guessCalc(guess);
+    }
+
+
+    public int guessCalc(char guess){
+        int correctGuesses = 0;
+        for (int i = 0; i < pattern.length(); i++){
+            if (pattern.charAt(i) == guess){
+                correctGuesses++;
+            }
+        }
+        if (correctGuesses == 0){
+            remainingGuesses--;
+        }
+        return correctGuesses;
+    }
 }
